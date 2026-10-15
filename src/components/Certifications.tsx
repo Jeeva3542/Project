@@ -16,6 +16,9 @@ import {
   FileCheck,
   Sparkles,
   ExternalLink,
+  Download,
+  Briefcase,
+  GraduationCap,
 } from 'lucide-react';
 
 interface CertificationsProps {
@@ -71,21 +74,34 @@ export const Certifications: React.FC<CertificationsProps> = ({ onSelectCertific
     }
   };
 
+  const getVerifiedCertIcon = (category: VerifiedCertificate['category']) => {
+    switch (category) {
+      case 'Internship':
+        return <Briefcase className="w-5 h-5 text-skyBlue" />;
+      case 'Competition & Award':
+        return <Award className="w-5 h-5 text-amber-400" />;
+      case 'Workshop':
+        return <GraduationCap className="w-5 h-5 text-purple-400" />;
+      default:
+        return <FileCheck className="w-5 h-5 text-emerald-400" />;
+    }
+  };
+
   return (
-    <section id="certifications" className="py-20 bg-midnight border-t border-borderNavy">
+    <section id="certifications" className="py-24 bg-midnight border-t border-borderNavy">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royalBlue/10 border border-royalBlue/30 text-skyBlue text-xs font-semibold tracking-wide uppercase mb-3">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royalBlue/10 border border-royalBlue/30 text-skyBlue text-xs font-semibold tracking-wide uppercase mb-3.5 shadow-sm">
             <Award className="w-3.5 h-3.5" />
-            <span>Professional &amp; Academic Credentials</span>
+            <span>Credentials &amp; Verifications</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-offWhite tracking-tight">
-            Certifications &amp; Verified Documents
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-offWhite tracking-tight font-sans">
+            Certifications &amp; Credentials
           </h2>
-          <div className="w-12 h-1 bg-royalBlue mx-auto rounded-full mt-3 mb-4" />
+          <div className="w-14 h-1 bg-royalBlue mx-auto rounded-full mt-3.5 mb-4 shadow-glow-blue" />
           <p className="text-coolGray text-base sm:text-lg leading-relaxed">
-            Authentic certificates, internship credentials, competition awards, and technical credentials earned throughout my academic career.
+            Verified internship credentials, competition awards, technical workshops, and professional industry certifications.
           </p>
 
           {/* Section Mode Toggle: Official Documents vs All Industry Credentials */}
@@ -100,7 +116,7 @@ export const Certifications: React.FC<CertificationsProps> = ({ onSelectCertific
               }`}
             >
               <FileCheck className="w-4 h-4 text-skyBlue" />
-              <span>Official Certificates ({verifiedCertificates.length})</span>
+              <span>Verified Certificates ({verifiedCertificates.length})</span>
             </button>
             <button
               type="button"
@@ -112,21 +128,21 @@ export const Certifications: React.FC<CertificationsProps> = ({ onSelectCertific
               }`}
             >
               <Award className="w-4 h-4 text-skyBlue" />
-              <span>Industry &amp; Course Credentials ({certifications.length})</span>
+              <span>Industry Certifications ({certifications.length})</span>
             </button>
           </div>
         </div>
 
-        {/* 1. Official Verified Certificates Grid (With Interactive Image Viewer) */}
+        {/* 1. Official Verified Certificates (Clean View Section without bulky permanent inline images) */}
         {activeTab === 'verified' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between text-xs text-mutedGray px-1">
               <span className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-skyBlue" />
-                <span>Click any certificate card or button below to inspect the verified document in high resolution.</span>
+                <span>Click <strong>"View Certificate"</strong> on any credential to inspect the verified original document in full detail.</span>
               </span>
               <span className="hidden sm:inline font-mono text-[11px] text-emerald-400 bg-cardNavy px-2.5 py-1 rounded-lg border border-borderNavy">
-                ✓ 4 Verified Physical Credentials
+                ✓ 4 Verified Documents Available
               </span>
             </div>
 
@@ -134,57 +150,40 @@ export const Certifications: React.FC<CertificationsProps> = ({ onSelectCertific
               {verifiedCertificates.map((cert) => (
                 <div
                   key={cert.id}
-                  className="bg-cardNavy rounded-2xl border border-borderNavy hover:border-royalBlue/50 hover:shadow-card-hover transition-all duration-300 overflow-hidden flex flex-col justify-between group"
+                  className="bg-cardNavy rounded-2xl p-6 sm:p-7 border border-borderNavy hover:border-royalBlue/50 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between group"
                 >
-                  {/* Certificate Image Preview Banner */}
-                  <div
-                    onClick={() => onSelectCertificate && onSelectCertificate(cert)}
-                    className="relative bg-deepNavy cursor-pointer overflow-hidden border-b border-borderNavy h-64 sm:h-72 flex items-center justify-center p-3"
-                    title={`Click to view full certificate: ${cert.title}`}
-                  >
-                    <picture className="w-full h-full flex items-center justify-center">
-                      <source srcSet={cert.image} type="image/webp" />
-                      <img
-                        src={cert.imageFallback}
-                        alt={cert.title}
-                        className="max-h-full max-w-full object-contain rounded-lg shadow-md transition-transform duration-500 group-hover:scale-[1.03]"
-                        loading="lazy"
-                      />
-                    </picture>
-
-                    {/* Hover Overlay with "View Certificate" Pill */}
-                    <div className="absolute inset-0 bg-midnight/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 backdrop-blur-[2px] flex items-center justify-center">
-                      <div className="px-4 py-2 rounded-xl bg-royalBlue text-white text-xs font-semibold shadow-glow-blue flex items-center gap-2">
-                        <Eye className="w-4 h-4 text-skyBlue" />
-                        <span>View Full Certificate</span>
+                  <div className="space-y-4">
+                    {/* Header Row: Category Icon + Badges */}
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-11 h-11 rounded-xl bg-deepNavy border border-borderNavy/80 flex items-center justify-center shrink-0 shadow-sm group-hover:border-skyBlue/40 transition-colors">
+                          {getVerifiedCertIcon(cert.category)}
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[10px] font-bold tracking-wider uppercase px-2.5 py-0.5 rounded-md bg-royalBlue/20 text-skyBlue border border-royalBlue/30">
+                              {cert.badge}
+                            </span>
+                          </div>
+                          <span className="text-xs text-coolGray font-semibold block mt-1">
+                            {cert.organization}
+                          </span>
+                        </div>
                       </div>
+
+                      {/* Verified Badge */}
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-deepNavy border border-emerald-500/30 text-[11px] font-medium text-emerald-400 shrink-0">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        <span>Verified</span>
+                      </span>
                     </div>
 
-                    {/* Top Floating Badge */}
-                    <div className="absolute top-3 left-3 px-3 py-1 rounded-lg bg-deepNavy/90 backdrop-blur-md border border-borderNavy text-[10px] font-bold uppercase tracking-wider text-skyBlue shadow-sm">
-                      {cert.badge}
-                    </div>
-
-                    {/* Top Right Verified Check */}
-                    <div className="absolute top-3 right-3 px-2.5 py-1 rounded-lg bg-deepNavy/90 backdrop-blur-md border border-emerald-500/30 text-[11px] font-medium text-emerald-400 flex items-center gap-1 shadow-sm">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>Verified</span>
-                    </div>
-                  </div>
-
-                  {/* Card Content & Metadata */}
-                  <div className="p-6 flex flex-col justify-between flex-grow space-y-4">
+                    {/* Certificate Title */}
                     <div>
-                      <div className="flex items-center gap-2 text-xs text-mutedGray mb-1.5">
-                        <Building className="w-3.5 h-3.5 text-skyBlue shrink-0" />
-                        <span className="font-semibold text-coolGray truncate">{cert.organization}</span>
-                      </div>
-
-                      <h3 className="font-bold text-offWhite text-lg leading-snug group-hover:text-skyBlue transition-colors mb-2">
+                      <h3 className="font-bold text-offWhite text-lg leading-snug group-hover:text-skyBlue transition-colors">
                         {cert.title}
                       </h3>
-
-                      <p className="text-xs text-coolGray leading-relaxed line-clamp-2">
+                      <p className="text-xs text-coolGray mt-2 leading-relaxed">
                         {cert.description}
                       </p>
                     </div>
@@ -200,33 +199,44 @@ export const Certifications: React.FC<CertificationsProps> = ({ onSelectCertific
                         </span>
                       ))}
                     </div>
+                  </div>
 
-                    {/* Bottom Metadata & Action Buttons */}
-                    <div className="pt-4 border-t border-borderNavy/70 flex flex-wrap items-center justify-between gap-3">
-                      <div className="flex items-center gap-1.5 text-xs text-mutedGray">
-                        <Calendar className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-                        <span>{cert.duration || cert.issueDate}</span>
-                      </div>
+                  {/* Card Bottom: Date & Interactive View Action */}
+                  <div className="mt-6 pt-4 border-t border-borderNavy/70 flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex items-center gap-1.5 text-xs text-mutedGray">
+                      <Calendar className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span>{cert.duration || cert.issueDate}</span>
+                    </div>
 
-                      <div className="flex items-center gap-2">
-                        <button
-                          type="button"
-                          onClick={() => onSelectCertificate && onSelectCertificate(cert)}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-white bg-royalBlue hover:bg-royalBlue-hover rounded-xl shadow-glow-blue transition-all"
-                        >
-                          <Eye className="w-3.5 h-3.5 text-skyBlue" />
-                          <span>View Certificate</span>
-                        </button>
-                        <a
-                          href={cert.image}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-2 rounded-xl bg-deepNavy hover:bg-cardNavy text-coolGray hover:text-offWhite border border-borderNavy transition-colors"
-                          title="Open certificate in new tab"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5 text-skyBlue" />
-                        </a>
-                      </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => onSelectCertificate && onSelectCertificate(cert)}
+                        className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold text-white bg-royalBlue hover:bg-royalBlue-hover rounded-xl shadow-glow-blue transition-all hover:-translate-y-0.5"
+                        title="Click to view full certificate image"
+                      >
+                        <Eye className="w-3.5 h-3.5 text-skyBlue" />
+                        <span>View Certificate</span>
+                      </button>
+
+                      <a
+                        href={cert.image}
+                        download={`${cert.id}.jpg`}
+                        className="p-2 rounded-xl bg-deepNavy hover:bg-cardNavy text-coolGray hover:text-offWhite border border-borderNavy transition-colors"
+                        title="Download certificate image"
+                      >
+                        <Download className="w-3.5 h-3.5 text-skyBlue" />
+                      </a>
+
+                      <a
+                        href={cert.image}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-xl bg-deepNavy hover:bg-cardNavy text-coolGray hover:text-offWhite border border-borderNavy transition-colors"
+                        title="Open raw image in new tab"
+                      >
+                        <ExternalLink className="w-3.5 h-3.5 text-skyBlue" />
+                      </a>
                     </div>
                   </div>
                 </div>
