@@ -12,10 +12,13 @@ import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
 import { ResumeModal } from './components/ResumeModal';
+import { CertificateModal } from './components/CertificateModal';
+import type { VerifiedCertificate } from './data/portfolioData';
 
 export function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
+  const [selectedCertificate, setSelectedCertificate] = useState<VerifiedCertificate | null>(null);
 
   useEffect(() => {
     const sectionIds = [
@@ -65,9 +68,9 @@ export function App() {
         <About />
         <Skills />
         <Education />
-        <Experience />
+        <Experience onSelectCertificate={(cert) => setSelectedCertificate(cert)} />
         <Projects />
-        <Certifications />
+        <Certifications onSelectCertificate={(cert) => setSelectedCertificate(cert)} />
         <Resume onOpenResumeModal={() => setIsResumeModalOpen(true)} />
         <Contact />
       </main>
@@ -82,6 +85,12 @@ export function App() {
       <ResumeModal
         isOpen={isResumeModalOpen}
         onClose={() => setIsResumeModalOpen(false)}
+      />
+
+      {/* Interactive Fullscreen Certificate Modal */}
+      <CertificateModal
+        certificate={selectedCertificate}
+        onClose={() => setSelectedCertificate(null)}
       />
     </div>
   );

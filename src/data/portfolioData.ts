@@ -21,6 +21,27 @@ export interface Internship {
   type: 'Internship' | 'Industrial Training';
   responsibilities: string[];
   technologiesLearned: string[];
+  certificateImage?: string;
+  certificateFallback?: string;
+}
+
+export interface VerifiedCertificate {
+  id: string;
+  title: string;
+  recipientName: string;
+  regNo?: string;
+  issuer: string;
+  organization: string;
+  location?: string;
+  issueDate: string;
+  duration?: string;
+  category: 'Internship' | 'Competition & Award' | 'Workshop';
+  badge: string;
+  description: string;
+  signatory?: string;
+  image: string;
+  imageFallback: string;
+  skills: string[];
 }
 
 export interface EducationItem {
@@ -219,13 +240,15 @@ export const portfolioData = {
         "Data Structures",
         "Database Connectivity",
       ],
+      certificateImage: "/certificates/growwpark-internship.webp",
+      certificateFallback: "/certificates/growwpark-internship.jpg",
     },
     {
       id: "apollo",
       title: "Python Intern",
       organization: "Apollo Computer Education",
       location: "Krishnagiri, Tamil Nadu",
-      duration: "July 2025",
+      duration: "June – July 2025",
       type: "Internship",
       responsibilities: [
         "Completed hands-on training curriculum in Python programming, syntax fundamentals, and basic software engineering workflows.",
@@ -239,12 +262,14 @@ export const portfolioData = {
         "Problem Solving",
         "Programming Fundamentals",
       ],
+      certificateImage: "/certificates/apollo-internship.webp",
+      certificateFallback: "/certificates/apollo-internship.jpg",
     },
     {
       id: "vei-workshop",
       title: "Web Development Using Python",
       organization: "VEI Technologies",
-      location: "Tamil Nadu",
+      location: "Chennai / PMC Tech, Tamil Nadu",
       duration: "March 2024",
       type: "Industrial Training",
       responsibilities: [
@@ -256,6 +281,8 @@ export const portfolioData = {
         "Backend Routing",
         "Web Development Practices",
       ],
+      certificateImage: "/certificates/vei-workshop.webp",
+      certificateFallback: "/certificates/vei-workshop.jpg",
     },
   ] as Internship[],
 
@@ -385,4 +412,81 @@ export const portfolioData = {
     date: "March 2026",
     context: "National Level IT Fest Competition",
   },
+
+  verifiedCertificates: [
+    {
+      id: "cert-growwpark",
+      title: "Python Programming Internship Completion Certificate",
+      recipientName: "Mr. JEEVA K",
+      regNo: "610823U104038",
+      organization: "Growwpark Technologies Pvt. Ltd.",
+      location: "Hosur, Tamil Nadu",
+      issuer: "Growwpark Technologies Pvt. Ltd.",
+      issueDate: "01 July 2026",
+      duration: "01 June 2026 – 01 July 2026",
+      category: "Internship",
+      badge: "Industry Internship",
+      signatory: "Gokul R (Director) • Mentor: Tamilselvan S.",
+      description:
+        "Certified completion of practical Python programming internship covering real-time software tasks, OOP architecture, file handling, exception handling, data structures, and database connectivity.",
+      image: "/certificates/growwpark-internship.webp",
+      imageFallback: "/certificates/growwpark-internship.jpg",
+      skills: ["Python", "OOP", "Data Structures", "Database Connectivity", "File Handling", "Debugging"],
+    },
+    {
+      id: "cert-apollo",
+      title: "Internship Completion Certificate in Python",
+      recipientName: "K. Jeeva",
+      regNo: "23U104038",
+      organization: "Apollo Computer Education Ltd.",
+      location: "Krishnagiri, Tamil Nadu",
+      issuer: "Apollo Computer Education Ltd.",
+      issueDate: "03 July 2025",
+      duration: "16 June 2025 – 02 July 2025",
+      category: "Internship",
+      badge: "Hands-on Training",
+      signatory: "Mamitha J (Manager)",
+      description:
+        "Certified completion of 15-day intensive Python internship program involving contemporary tools, practical code assignments, and commended technical participation.",
+      image: "/certificates/apollo-internship.webp",
+      imageFallback: "/certificates/apollo-internship.jpg",
+      skills: ["Python Programming", "Practical Tasks", "Software Engineering Workflows", "Problem Solving"],
+    },
+    {
+      id: "cert-christ-quiz",
+      title: "Certificate of Appreciation — II Place in Technical Quiz",
+      recipientName: "Jeeva",
+      organization: "Christ College of Science and Management",
+      location: "Alambady, Malur, Karnataka",
+      issuer: "Dept. of Computing & Basic Sciences with IQAC",
+      issueDate: "06 March 2026",
+      duration: "National Level IT Fest — LOGIN 2K26",
+      category: "Competition & Award",
+      badge: "2nd Place Award",
+      signatory: "Faculty Co-ordinator, HOD/CBS, Principal",
+      description:
+        "Awarded for securing 2nd Place in the Technical Quiz event at National Level IT Fest LOGIN 2K26 in recognition of outstanding performance and technical acumen.",
+      image: "/certificates/christ-college-award.webp",
+      imageFallback: "/certificates/christ-college-award.jpg",
+      skills: ["Technical Quiz", "Computer Science Fundamentals", "Rapid Problem Solving", "IT Knowledge"],
+    },
+    {
+      id: "cert-vei-workshop",
+      title: "Certificate of Workshop — Web Development Using Python",
+      recipientName: "K. Jeeva",
+      organization: "VEI Technologies Pvt. Ltd.",
+      location: "Chennai / PMC Tech, Hosur",
+      issuer: "VEI Technologies in association with Dept. of CSE, PMC Tech",
+      issueDate: "28 March 2024",
+      duration: "27 March 2024 – 28 March 2024",
+      category: "Workshop",
+      badge: "Technical Workshop",
+      signatory: "Dr. B. Ezhilavan (VEI Technologies)",
+      description:
+        "Certified completion of a two-day technical workshop on Web Development Using Python, focusing on client-server architecture, backend routing, and dynamic application design.",
+      image: "/certificates/vei-workshop.webp",
+      imageFallback: "/certificates/vei-workshop.jpg",
+      skills: ["Web Development", "Python", "Backend Routing", "Client-Server Architecture"],
+    },
+  ] as VerifiedCertificate[],
 };
