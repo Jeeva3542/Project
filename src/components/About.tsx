@@ -93,6 +93,34 @@ export const About: React.FC = () => {
 
           {/* Right Column: Structured Information Cards */}
           <div className="lg:col-span-5 space-y-4">
+            {/* Candidate Identity Card with Highlighted Portrait */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-cardNavy border border-borderNavy shadow-card hover:border-skyBlue/50 transition-all flex items-center gap-4 group">
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl p-1 bg-gradient-to-tr from-royalBlue via-skyBlue to-emerald-400 shrink-0 shadow-[0_0_20px_rgba(56,189,248,0.35)] group-hover:shadow-[0_0_30px_rgba(56,189,248,0.6)] transition-all">
+                <div className="w-full h-full rounded-xl overflow-hidden bg-deepNavy">
+                  <img
+                    src={personalInfo.profilePicture}
+                    alt={personalInfo.name}
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+              </div>
+              <div className="space-y-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded bg-royalBlue/20 text-skyBlue border border-royalBlue/30">
+                    Candidate Profile
+                  </span>
+                </div>
+                <h4 className="text-lg font-bold text-offWhite leading-tight group-hover:text-skyBlue transition-colors truncate">
+                  {personalInfo.name}
+                </h4>
+                <p className="text-xs text-coolGray truncate">B.E. Computer Science &amp; Engineering</p>
+                <div className="flex items-center gap-1.5 text-[11px] text-emerald-400 font-medium pt-0.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>Available for Entry-Level Roles</span>
+                </div>
+              </div>
+            </div>
+
             {/* Card 1: Education Snapshot */}
             <div className="p-6 rounded-2xl bg-cardNavy border border-borderNavy shadow-card hover:border-skyBlue/50 transition-all">
               <div className="flex items-start gap-4">

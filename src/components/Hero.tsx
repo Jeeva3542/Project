@@ -12,6 +12,7 @@ import {
   ExternalLink,
   GraduationCap,
   Eye,
+  Code2,
 } from 'lucide-react';
 
 interface HeroProps {
@@ -189,41 +190,52 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResumeModal }) => {
             </div>
           </div>
 
-          {/* Right Column: Premium Profile Picture Frame & Quick Metrics */}
+          {/* Right Column: Prominently Highlighted Profile Picture Frame */}
           <div className="lg:col-span-5 w-full flex flex-col items-center">
-            {/* Portrait Frame Container */}
+            {/* Portrait Frame Container with Multi-Layer Glow */}
             <div className="relative group flex justify-center">
-              {/* Outer Ambient Glow with Navy-Blue Palette */}
-              <div className="absolute -inset-2 bg-gradient-to-r from-royalBlue/25 via-skyBlue/20 to-royalBlue/25 rounded-[2.5rem] blur-2xl opacity-70 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              {/* Outer Radiance 1: Dynamic Ambient Bloom */}
+              <div className="absolute -inset-4 sm:-inset-6 bg-gradient-to-r from-royalBlue/40 via-skyBlue/30 to-royalBlue/40 rounded-full blur-3xl opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 pointer-events-none" />
 
-              {/* Main Softly Rounded Frame Card */}
-              <div className= "relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-full p-2 bg-gradient-to-b from-cardNavy via-midnight to-deepNavy border border-borderNavy group-hover:border-skyBlue/50 shadow-2xl backdrop-blur-xl transition-all duration-300">
-                <div className="w-full h-full rounded-full overflow-hidden relative bg-deepNavy border border-borderNavy/70 shadow-inner">
-                  <img
-                    src={personalInfo.profilePicture}
-                    alt={personalInfo.profilePictureAlt}
-                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                    loading="eager"
-                  />
-                  {/* Subtle Gradient Overlay at bottom for clean edge */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-midnight/80 via-transparent to-transparent pointer-events-none" />
+              {/* Outer Radiance 2: Soft Neon Halo */}
+              <div className="absolute -inset-1.5 bg-gradient-to-tr from-skyBlue via-royalBlue to-emerald-400 rounded-full blur-[3px] opacity-75 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              {/* Main Glowing Frame Ring */}
+              <div className="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[25rem] lg:h-[25rem] rounded-full p-2 bg-gradient-to-tr from-royalBlue via-skyBlue to-royalBlue shadow-[0_0_60px_rgba(37,99,235,0.4)] group-hover:shadow-[0_0_90px_rgba(56,189,248,0.65)] transition-all duration-500">
+                <div className="w-full h-full rounded-full p-1.5 bg-cardNavy">
+                  <div className="w-full h-full rounded-full overflow-hidden relative bg-deepNavy border-2 border-borderNavy/90 shadow-2xl">
+                    <img
+                      src={personalInfo.profilePicture}
+                      alt={personalInfo.profilePictureAlt}
+                      className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-108"
+                      loading="eager"
+                    />
+                    {/* Subtle bottom gradient for smooth transition */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-midnight/70 via-transparent to-transparent pointer-events-none" />
+                  </div>
                 </div>
 
-                {/* Floating Badge: Top-Right (Available for Hire) */}
-                <div className="absolute -top-3.5 -right-3 sm:-right-4 px-4 py-1.5 rounded-full bg-deepNavy/95 border border-skyBlue/40 text-[11px] font-semibold text-skyBlue shadow-xl backdrop-blur-md flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                {/* Floating Badge 1: Top-Right (Available for Hire with Live Pulse) */}
+                <div className="absolute -top-2 -right-2 sm:-top-3 sm:-right-4 px-4 py-1.5 rounded-full bg-deepNavy/95 border border-skyBlue/50 text-[11px] font-bold text-skyBlue shadow-2xl backdrop-blur-md flex items-center gap-2 group-hover:scale-105 transition-transform">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_10px_#34d399]" />
                   <span>Entry-Level IT</span>
                 </div>
 
-                {/* Floating Badge: Bottom-Left (College & CGPA) */}
-                <div className="absolute -bottom-3.5 -left-3 sm:-left-4 px-4 py-2 rounded-2xl bg-deepNavy/95 border border-borderNavy text-xs text-offWhite shadow-xl backdrop-blur-md flex items-center gap-2.5 group-hover:border-skyBlue/40 transition-colors">
-                  <div className="w-7 h-7 rounded-xl bg-royalBlue/20 text-skyBlue flex items-center justify-center border border-royalBlue/30">
+                {/* Floating Badge 2: Bottom-Left (College & CGPA) */}
+                <div className="absolute -bottom-2 -left-2 sm:-bottom-3 sm:-left-4 px-4 py-2 rounded-2xl bg-deepNavy/95 border border-borderNavy/80 text-xs text-offWhite shadow-2xl backdrop-blur-md flex items-center gap-2.5 group-hover:border-skyBlue/50 group-hover:scale-105 transition-all">
+                  <div className="w-8 h-8 rounded-xl bg-royalBlue/20 text-skyBlue flex items-center justify-center border border-royalBlue/30">
                     <GraduationCap className="w-4 h-4" />
                   </div>
                   <div className="text-left">
                     <div className="font-bold text-offWhite text-[11px] leading-tight">PMC Tech, Hosur</div>
-                    <div className="text-[10px] text-skyBlue font-mono font-medium">CGPA: 7.53*</div>
+                    <div className="text-[10px] text-skyBlue font-mono font-semibold">CGPA: 7.53*</div>
                   </div>
+                </div>
+
+                {/* Floating Badge 3: Bottom-Right (Technical Focus) */}
+                <div className="hidden sm:flex absolute bottom-6 -right-4 px-3.5 py-1.5 rounded-xl bg-deepNavy/95 border border-royalBlue/40 text-[11px] text-offWhite shadow-2xl backdrop-blur-md items-center gap-2 group-hover:border-skyBlue/50 transition-all">
+                  <Code2 className="w-3.5 h-3.5 text-skyBlue" />
+                  <span className="font-semibold text-coolGray">Python &amp; ML</span>
                 </div>
               </div>
             </div>

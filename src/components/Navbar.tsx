@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { portfolioData } from '../data/portfolioData';
-import { Download, Menu, X, ArrowUpRight, Code, Eye } from 'lucide-react';
+import { Download, Menu, X, ArrowUpRight, Eye } from 'lucide-react';
 
 interface NavbarProps {
   activeSection: string;
@@ -65,8 +65,14 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onOpenResumeModal
             className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-skyBlue rounded-lg p-1"
             aria-label="Jeeva K Portfolio Home"
           >
-            <div className="w-10 h-10 rounded-xl bg-cardNavy border border-borderNavy flex items-center justify-center text-skyBlue group-hover:border-skyBlue group-hover:bg-royalBlue/20 transition-all duration-300 shadow-sm">
-              <Code className="w-5 h-5" />
+            <div className="relative w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-royalBlue via-skyBlue to-emerald-400 group-hover:shadow-[0_0_15px_rgba(56,189,248,0.5)] transition-all duration-300 shrink-0">
+              <div className="w-full h-full rounded-full overflow-hidden bg-deepNavy border border-midnight">
+                <img
+                  src={personalInfo.profilePicture}
+                  alt={personalInfo.name}
+                  className="w-full h-full object-cover object-top"
+                />
+              </div>
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-extrabold tracking-wider text-offWhite group-hover:text-skyBlue transition-colors font-sans">
