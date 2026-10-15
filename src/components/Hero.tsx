@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResumeModal }) => {
       onOpenResumeModal();
       return;
     }
-    const resumeEl = document.getElementById('resume');
+    const resumeEl = document.getElementById('qualifications') || document.getElementById('resume');
     if (resumeEl) {
       const navOffset = 80;
       const elementPosition = resumeEl.getBoundingClientRect().top;
@@ -131,7 +131,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResumeModal }) => {
 
               {/* Primary 2: View Resume in Website */}
               <a
-                href="#resume"
+                href="#qualifications"
                 onClick={handleScrollToResume}
                 className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-sm sm:text-base font-semibold text-offWhite bg-cardNavy hover:bg-cardNavy/80 hover:border-skyBlue border border-borderNavy rounded-xl shadow-sm transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-skyBlue group"
                 title="View Resume in the portfolio viewer"

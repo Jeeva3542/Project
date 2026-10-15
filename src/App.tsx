@@ -29,7 +29,7 @@ export function App() {
       'experience',
       'projects',
       'certifications',
-      'resume',
+      'qualifications',
       'contact',
     ];
 

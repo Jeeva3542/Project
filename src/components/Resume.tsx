@@ -23,20 +23,21 @@ export const Resume: React.FC<ResumeProps> = ({ onOpenResumeModal }) => {
   const [viewMode, setViewMode] = useState<'document' | 'iframe'>('document');
 
   return (
-    <section id="resume" className="py-20 bg-midnight text-offWhite border-t border-borderNavy">
+    <section id="qualifications" className="py-20 bg-midnight text-offWhite border-t border-borderNavy relative">
+      <div id="resume" className="absolute -top-20" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-14">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-royalBlue/10 border border-royalBlue/30 text-skyBlue text-xs font-semibold tracking-wide uppercase mb-3">
             <FileText className="w-3.5 h-3.5 text-skyBlue" />
-            <span>Curriculum Vitae</span>
+            <span>Verified Credentials</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-offWhite tracking-tight">
-            Resume &amp; Qualifications
+            Qualifications
           </h2>
           <div className="w-12 h-1 bg-royalBlue mx-auto rounded-full mt-3 mb-4" />
           <p className="text-coolGray text-base sm:text-lg leading-relaxed">
-            Review my complete resume directly in the browser, expand it into full-screen view, or download the official PDF.
+            Review my complete qualifications and curriculum vitae directly in the browser, expand it into full-screen view, or download the official PDF.
           </p>
         </div>
 

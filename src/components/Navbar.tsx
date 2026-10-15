@@ -28,7 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onOpenResumeModal
     { label: 'Experience', href: '#experience' },
     { label: 'Projects', href: '#projects' },
     { label: 'Certifications', href: '#certifications' },
-    { label: 'Resume', href: '#resume' },
+    { label: 'Qualifications', href: '#qualifications' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -114,7 +114,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onOpenResumeModal
                 if (onOpenResumeModal) {
                   onOpenResumeModal();
                 } else {
-                  const el = document.getElementById('resume');
+                  const el = document.getElementById('qualifications') || document.getElementById('resume');
                   if (el) {
                     el.scrollIntoView({ behavior: 'smooth' });
                   }
@@ -147,12 +147,12 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onOpenResumeModal
                 if (onOpenResumeModal) {
                   onOpenResumeModal();
                 } else {
-                  const el = document.getElementById('resume');
+                  const el = document.getElementById('qualifications') || document.getElementById('resume');
                   if (el) el.scrollIntoView({ behavior: 'smooth' });
                 }
               }}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-skyBlue bg-cardNavy border border-borderNavy rounded-lg shadow-sm"
-              aria-label="View Resume"
+              aria-label="View Qualifications"
             >
               <Eye className="w-3.5 h-3.5 text-skyBlue" />
               <span>Resume</span>
@@ -201,7 +201,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection, onOpenResumeModal
                   if (onOpenResumeModal) {
                     onOpenResumeModal();
                   } else {
-                    const el = document.getElementById('resume');
+                    const el = document.getElementById('qualifications') || document.getElementById('resume');
                     if (el) el.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
