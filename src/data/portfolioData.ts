@@ -76,6 +76,8 @@ export const portfolioData = {
       portfolioUrl: "https://jeeva3542.github.io/Jeeva-Portfolio",
       resumeFileName: "Jeeva_K_Resume.pdf",
       resumeDownloadPath: "/Jeeva_K_Resume.pdf",
+      resumePreviewImage: "/resume-preview.webp",
+      resumePreviewFallback: "/resume-preview.jpg",
     },
     profilePicture: "/profile.jpg",
     profilePictureAlt: "Jeeva K — Profile Picture",

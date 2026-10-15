@@ -7,12 +7,15 @@ import { Education } from './components/Education';
 import { Experience } from './components/Experience';
 import { Projects } from './components/Projects';
 import { Certifications } from './components/Certifications';
+import { Resume } from './components/Resume';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
+import { ResumeModal } from './components/ResumeModal';
 
 export function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
   useEffect(() => {
     const sectionIds = [
@@ -23,6 +26,7 @@ export function App() {
       'experience',
       'projects',
       'certifications',
+      'resume',
       'contact',
     ];
 
@@ -50,17 +54,21 @@ export function App() {
   return (
     <div className="min-h-screen bg-midnight text-offWhite flex flex-col font-sans selection:bg-royalBlue selection:text-white">
       {/* Navigation Bar */}
-      <Navbar activeSection={activeSection} />
+      <Navbar
+        activeSection={activeSection}
+        onOpenResumeModal={() => setIsResumeModalOpen(true)}
+      />
 
       {/* Main Content Sections */}
       <main className="flex-grow">
-        <Hero />
+        <Hero onOpenResumeModal={() => setIsResumeModalOpen(true)} />
         <About />
         <Skills />
         <Education />
         <Experience />
         <Projects />
         <Certifications />
+        <Resume onOpenResumeModal={() => setIsResumeModalOpen(true)} />
         <Contact />
       </main>
 
@@ -69,6 +77,12 @@ export function App() {
 
       {/* Scroll to Top floating button */}
       <ScrollToTop />
+
+      {/* Interactive Fullscreen Resume Modal */}
+      <ResumeModal
+        isOpen={isResumeModalOpen}
+        onClose={() => setIsResumeModalOpen(false)}
+      />
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { portfolioData } from '../data/portfolioData';
-import { Download, Menu, X, ArrowUpRight, Code } from 'lucide-react';
+import { Download, Menu, X, ArrowUpRight, Code, Eye } from 'lucide-react';
 
 interface NavbarProps {
   activeSection: string;
+  onOpenResumeModal?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
+export const Navbar: React.FC<NavbarProps> = ({ activeSection, onOpenResumeModal }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { personalInfo } = portfolioData;
@@ -27,6 +28,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
     { label: 'Experience', href: '#experience' },
     { label: 'Projects', href: '#projects' },
     { label: 'Certifications', href: '#certifications' },
+    { label: 'Resume', href: '#resume' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -98,30 +100,57 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
             })}
           </nav>
 
-          {/* Desktop Action: Download Resume */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Desktop Actions: View Resume + Download */}
+          <div className="hidden lg:flex items-center gap-2.5">
+            <button
+              type="button"
+              onClick={() => {
+                if (onOpenResumeModal) {
+                  onOpenResumeModal();
+                } else {
+                  const el = document.getElementById('resume');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }
+              }}
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-skyBlue bg-cardNavy hover:bg-cardNavy/80 border border-borderNavy hover:border-skyBlue/50 rounded-xl transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-skyBlue"
+              title="View resume inside portfolio"
+            >
+              <Eye className="w-4 h-4 text-skyBlue" />
+              <span>View Resume</span>
+            </button>
+
             <a
               href={personalInfo.contact.resumeDownloadPath}
               download={personalInfo.contact.resumeFileName}
-              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-royalBlue hover:bg-royalBlue-hover rounded-xl shadow-glow-blue transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-skyBlue focus:ring-offset-2 focus:ring-offset-midnight"
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-royalBlue hover:bg-royalBlue-hover rounded-xl shadow-glow-blue transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-skyBlue focus:ring-offset-2 focus:ring-offset-midnight"
               aria-label="Download Resume PDF"
+              title="Download PDF copy"
             >
               <Download className="w-4 h-4 text-skyBlue" />
-              <span>Download Resume</span>
+              <span>Download</span>
             </a>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="flex lg:hidden items-center gap-2">
-            <a
-              href={personalInfo.contact.resumeDownloadPath}
-              download={personalInfo.contact.resumeFileName}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-royalBlue rounded-lg shadow-sm"
-              aria-label="Download Resume"
+            <button
+              type="button"
+              onClick={() => {
+                if (onOpenResumeModal) {
+                  onOpenResumeModal();
+                } else {
+                  const el = document.getElementById('resume');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-skyBlue bg-cardNavy border border-borderNavy rounded-lg shadow-sm"
+              aria-label="View Resume"
             >
-              <Download className="w-3.5 h-3.5 text-skyBlue" />
+              <Eye className="w-3.5 h-3.5 text-skyBlue" />
               <span>Resume</span>
-            </a>
+            </button>
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -159,10 +188,26 @@ export const Navbar: React.FC<NavbarProps> = ({ activeSection }) => {
               );
             })}
             <div className="pt-3 border-t border-borderNavy mt-2 flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  if (onOpenResumeModal) {
+                    onOpenResumeModal();
+                  } else {
+                    const el = document.getElementById('resume');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-royalBlue hover:bg-royalBlue-hover rounded-xl shadow-glow-blue transition-colors"
+              >
+                <Eye className="w-4 h-4 text-skyBlue" />
+                <span>View Resume in Portfolio</span>
+              </button>
               <a
                 href={personalInfo.contact.resumeDownloadPath}
                 download={personalInfo.contact.resumeFileName}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-royalBlue hover:bg-royalBlue-hover rounded-xl shadow-glow-blue transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold text-coolGray hover:text-offWhite bg-cardNavy rounded-xl border border-borderNavy transition-colors"
               >
                 <Download className="w-4 h-4 text-skyBlue" />
                 <span>Download Resume (PDF)</span>

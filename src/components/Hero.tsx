@@ -11,9 +11,14 @@ import {
   Sparkles,
   ExternalLink,
   GraduationCap,
+  Eye,
 } from 'lucide-react';
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  onOpenResumeModal?: () => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ onOpenResumeModal }) => {
   const { personalInfo, highlights } = portfolioData;
 
   const handleScrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -22,6 +27,24 @@ export const Hero: React.FC = () => {
     if (projectsEl) {
       const navOffset = 80;
       const elementPosition = projectsEl.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  };
+
+  const handleScrollToResume = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (onOpenResumeModal) {
+      onOpenResumeModal();
+      return;
+    }
+    const resumeEl = document.getElementById('resume');
+    if (resumeEl) {
+      const navOffset = 80;
+      const elementPosition = resumeEl.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navOffset;
       window.scrollTo({
         top: offsetPosition,
@@ -94,25 +117,37 @@ export const Hero: React.FC = () => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-3 w-full sm:w-auto">
+            <div className="flex flex-wrap items-center gap-3.5 pt-3 w-full sm:w-auto">
               {/* Primary 1: Explore Projects */}
               <a
                 href="#projects"
                 onClick={handleScrollToProjects}
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-base font-bold text-white bg-royalBlue hover:bg-royalBlue-hover rounded-xl shadow-glow-blue transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-skyBlue focus:ring-offset-2 focus:ring-offset-midnight"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-sm sm:text-base font-bold text-white bg-royalBlue hover:bg-royalBlue-hover rounded-xl shadow-glow-blue transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-skyBlue focus:ring-offset-2 focus:ring-offset-midnight"
               >
                 <FolderGit2 className="w-5 h-5 text-skyBlue" />
-                <span>Explore My Projects</span>
+                <span>Explore Projects</span>
               </a>
 
-              {/* Primary 2: Download Resume */}
+              {/* Primary 2: View Resume in Website */}
+              <a
+                href="#resume"
+                onClick={handleScrollToResume}
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 text-sm sm:text-base font-semibold text-offWhite bg-cardNavy hover:bg-cardNavy/80 hover:border-skyBlue border border-borderNavy rounded-xl shadow-sm transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-skyBlue group"
+                title="View Resume in the portfolio viewer"
+              >
+                <Eye className="w-5 h-5 text-skyBlue group-hover:scale-110 transition-transform" />
+                <span>View Resume</span>
+              </a>
+
+              {/* Primary 3: Download PDF */}
               <a
                 href={personalInfo.contact.resumeDownloadPath}
                 download={personalInfo.contact.resumeFileName}
-                className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-base font-semibold text-offWhite bg-cardNavy hover:bg-cardNavy/80 hover:border-skyBlue border border-borderNavy rounded-xl transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-skyBlue"
+                className="inline-flex items-center justify-center gap-2 px-4 py-3.5 text-sm font-medium text-coolGray hover:text-offWhite bg-midnight hover:bg-cardNavy border border-borderNavy/80 hover:border-borderNavy rounded-xl transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-skyBlue"
+                title="Direct download PDF"
               >
-                <Download className="w-5 h-5 text-skyBlue" />
-                <span>Download Resume</span>
+                <Download className="w-4 h-4 text-skyBlue" />
+                <span className="hidden sm:inline">Download PDF</span>
               </a>
             </div>
 
